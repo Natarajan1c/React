@@ -1,2 +1,41 @@
 https://jscomplete.com/repl/
 
+
+sample 1:
+-----------
+
+const MyButton = function (props){
+  return(
+		<button>{props.label}</button>
+  );
+}
+
+ReactDOM.render(<MyButton label ="Test me"/>,mountNode);
+
+
+--------------------------------------------------------------------------------
+class MyButton extends React.Component {
+  
+  constructor(props){
+  	super(props);
+    this.state = {counter: 1};
+  }
+  
+  handleClick = () => {
+  	this.setState({
+     counter: this.state.counter + 1
+    })
+  };
+  
+  render(){
+    return(
+    	<button onClick ={this.handleClick}>
+      	{this.state.counter}
+      </button>
+    );
+  }
+}
+
+ReactDOM.render(<MyButton/>,mountNode);
+
+-------------------------------------------------------------------------------
