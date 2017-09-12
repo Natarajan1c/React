@@ -15,27 +15,41 @@ ReactDOM.render(<MyButton label ="Test me"/>,mountNode);
 
 --------------------------------------------------------------------------------
 class MyButton extends React.Component {
-  
-  constructor(props){
-  	super(props);
-    this.state = {counter: 1};
-  }
-  
-  handleClick = () => {
-  	this.setState({
-     counter: this.state.counter + 1
-    })
-  };
-  
+ 
+
   render(){
     return(
-    	<button onClick ={this.handleClick}>
-      	{this.state.counter}
+    	<button onClick ={this.props.onClickFun}>
+      	+1
       </button>
     );
   }
 }
 
-ReactDOM.render(<MyButton/>,mountNode);
+const Result = (props) => {
+	return(
+  	<div>{props.counter}</div>
+  );
+};
 
+class App extends React.Component {
+	state = {counter: 1};
+  
+  incrementCounter = () => {
+  	this.setState({
+     	counter: this.state.counter + 1
+    })
+  };
+  
+	render(){
+  	return(
+    	<div>
+      	<MyButton onClickFun={this.incrementCounter} />
+        <Result counter ={this.state.counter}/>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App/>,mountNode);
 -------------------------------------------------------------------------------
