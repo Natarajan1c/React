@@ -1,5 +1,6 @@
-https://jscomplete.com/repl/
-
+React playground	: https://jscomplete.com/repl/
+GitHub APIs		: https://api.github.com/
+React Devtools		: https://github.com/facebook/react-devtools
 
 sample 1:
 -----------
@@ -14,13 +15,16 @@ ReactDOM.render(<MyButton label ="Test me"/>,mountNode);
 
 
 --------------------------------------------------------------------------------
-class MyButton extends React.Component {
- 
 
+class MyButton extends React.Component {
+ onClickFun = () => {
+ 	this.props.onClickFun(this.props.incrementValue);
+ };
+ 
   render(){
     return(
-    	<button onClick ={this.props.onClickFun}>
-      	+1
+    	<button onClick ={this.onClickFun}>
+      	+{this.props.incrementValue}
       </button>
     );
   }
@@ -35,16 +39,19 @@ const Result = (props) => {
 class App extends React.Component {
 	state = {counter: 1};
   
-  incrementCounter = () => {
-  	this.setState({
-     	counter: this.state.counter + 1
-    })
+  incrementCounter = (incrementValue) => {
+  	this.setState((prevState) => ({
+     	counter: prevState.counter + incrementValue
+    }));
   };
   
 	render(){
   	return(
     	<div>
-      	<MyButton onClickFun={this.incrementCounter} />
+      	<MyButton incrementValue = {1} onClickFun={this.incrementCounter} />
+        <MyButton incrementValue = {2} onClickFun={this.incrementCounter} />
+        <MyButton incrementValue = {5} onClickFun={this.incrementCounter} />
+        <MyButton incrementValue = {10} onClickFun={this.incrementCounter} />
         <Result counter ={this.state.counter}/>
       </div>
     );
@@ -52,4 +59,5 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App/>,mountNode);
+
 -------------------------------------------------------------------------------
