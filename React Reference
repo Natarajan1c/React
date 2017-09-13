@@ -61,3 +61,77 @@ class App extends React.Component {
 ReactDOM.render(<App/>,mountNode);
 
 -------------------------------------------------------------------------------
+
+const Card = (props) => {
+	return(
+  	<div>
+    	<img width="75" src ={props.avt_url}/>
+      <div>
+      	<div>{props.name}</div>
+        <div>{props.location}</div>
+      </div>
+    </div>
+  );
+};
+
+let carddata = [
+  {name :"Tom Preston-Werner", 
+   avt_url : "https://avatars0.githubusercontent.com/u/1?v=4",
+   location : "San Francisco"
+	},
+  {name : "Tom Preston-Werner", 
+   avt_url :  "https://avatars0.githubusercontent.com/u/1?v=4",
+   location :  "San Francisco"
+	}
+] 
+
+const CardList = (props) => {
+	return(
+  	<div>
+			{props.cards.map(card => <Card {...card} />)}
+    </div>
+  );
+};
+
+class Form extends React.Component {
+  render(){
+		return (
+    	<form>
+      	<input type="text" placeholder="Enter Github username"/>
+        <button type ="submit">Add card</button>
+      </form>
+    );
+  }
+}
+
+class App extends React.Component{
+	render(){
+  	return(
+    	<div>
+        <Form/>
+        <CardList cards={carddata} />
+    	</div>
+    );
+  }
+}
+
+ReactDOM.render (<App/>,mountNode);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
